@@ -1,0 +1,25 @@
+{
+  "name": "kill-spoon",
+  "version": "1.0.0",
+  "description": "a game about killin",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuicyLoosie/kill-spoon.git"
+  },
+  "keywords": [
+    "killin"
+  ],
+  "author": "JLz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuicyLoosie/kill-spoon/issues"
+  },
+  "homepage": "https://github.com/JuicyLoosie/kill-spoon#readme",
+  "dependencies": {
+    "three": "^0.92.0"
+  }
+}
