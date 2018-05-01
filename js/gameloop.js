@@ -70,8 +70,7 @@ var ySpeed = 10;
 
 document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
-    var keyCode = event.which;
-    console.log("keydown : ", keyCode)
+    var keyCode = event.which
     if (keyCode == 83) {
         cube.position.z += ySpeed;
     } else if (keyCode == 87) {
