@@ -26,8 +26,8 @@ var camera = new THREE.PerspectiveCamera(
                   FAR )
 
 //back dat camera up
-camera.position.y = 160
-camera.position.z = 400
+camera.position.y = 260
+camera.position.z = 500
 
 scene.add(camera)
 //create cube
@@ -42,9 +42,21 @@ camera.lookAt(cube.position)
 
 //create skybox
 var skyboxGeometry = new THREE.CubeGeometry(10000, 10000, 10000)
-var skyboxMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, side: THREE.BackSide })
+var skyboxMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.BackSide })
 var skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterial)
 scene.add(skybox)
+
+
+
+//create a floor
+var planeGeometry = new THREE.PlaneGeometry( 10000, 10000, 32 );
+//import plane texture
+var texture = new THREE.TextureLoader().load('http://4.bp.blogspot.com/-Mz94fzjf9DM/UmpLfICutiI/AAAAAAAAEk8/8Uid3yVbuzc/s1600/Dirt+00+seamless.jpg');
+var planeMaterial = new THREE.MeshBasicMaterial( { map: texture, side: THREE.DoubleSide } );
+let plane = new THREE.Mesh( planeGeometry, planeMaterial );
+plane.rotateX( Math.PI / 2 )
+plane.position.y = -100
+scene.add(plane)
 
 //light it up
 var pointLight = new THREE.PointLight(0xffffff);
