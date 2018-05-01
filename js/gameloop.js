@@ -34,25 +34,23 @@ scene.add(camera)
 var cubeGeometry = new THREE.CubeGeometry(100, 100, 100)
 var cubeMaterial = new THREE.MeshLambertMaterial({color:0x1ec876})
 var cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
-
-cube.rotation.y = Math.PI * 45/180
 scene.add(cube)
 
 camera.lookAt(cube.position)
 
 //create skybox
 var skyboxGeometry = new THREE.CubeGeometry(10000, 10000, 10000)
-var skyboxMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.BackSide })
+let skyboxTexture = new THREE.TextureLoader().load('http://i1351.photobucket.com/albums/p794/takabuschik/sky_sunset_04_showoff_zpsf1fd4879.jpg')
+var skyboxMaterial = new THREE.MeshBasicMaterial({ map: skyboxTexture, side: THREE.BackSide })
 var skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterial)
 scene.add(skybox)
 
 
 
 //create a floor
-var planeGeometry = new THREE.PlaneGeometry( 10000, 10000, 32 );
-//import plane texture
-var texture = new THREE.TextureLoader().load('http://4.bp.blogspot.com/-Mz94fzjf9DM/UmpLfICutiI/AAAAAAAAEk8/8Uid3yVbuzc/s1600/Dirt+00+seamless.jpg');
-var planeMaterial = new THREE.MeshBasicMaterial( { map: texture, side: THREE.DoubleSide } );
+var planeGeometry = new THREE.PlaneGeometry( 10000, 10000, 32 )
+var planeTexture = new THREE.TextureLoader().load('http://4.bp.blogspot.com/-Mz94fzjf9DM/UmpLfICutiI/AAAAAAAAEk8/8Uid3yVbuzc/s1600/Dirt+00+seamless.jpg')
+var planeMaterial = new THREE.MeshBasicMaterial({map: planeTexture, side: THREE.DoubleSide })
 let plane = new THREE.Mesh( planeGeometry, planeMaterial );
 plane.rotateX( Math.PI / 2 )
 plane.position.y = -100
@@ -66,6 +64,26 @@ scene.add(pointLight);
 
 var clock = new THREE.Clock
 
+// movement - please calibrate these values
+var xSpeed = 10;
+var ySpeed = 10;
+
+document.addEventListener("keydown", onDocumentKeyDown, false);
+function onDocumentKeyDown(event) {
+    var keyCode = event.which;
+    console.log("keydown : ", keyCode)
+    if (keyCode == 83) {
+        cube.position.z += ySpeed;
+    } else if (keyCode == 87) {
+        cube.position.z -= ySpeed;
+    } else if (keyCode == 65) {
+        cube.position.x -= xSpeed;
+    } else if (keyCode == 68) {
+        cube.position.x += xSpeed;
+    } else if (keyCode == 32) {
+        cube.position.set(0, 0, 0);
+    }
+}
 
 //render loop
 function render(){
